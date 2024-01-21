@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Application1</string>
+    <string name="nameLabel">Name</string>
+    <string name="studentLabel">Student ID</string>
+    <string name="majorLabel">Major</string>
+    <string name="hobbyLabel">Hobby</string>
+    <string name="name">George</string>
+    <string name="studentID">0308122</string>
+    <string name="major">Information Systems</string>
+    <string name="hobby">Music, Badminton</string>
+    <string name="colon">:</string>
+    <string name="buttonLabel">Confirm</string>
+</resources>
