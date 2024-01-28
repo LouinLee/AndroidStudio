@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fontSizeButton">24dp</dimen>
+    <dimen name="fontSizeLeft">20dp</dimen>
+    <dimen name="fontSizeRight">22dp</dimen>
+</resources>
