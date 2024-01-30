@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="20dp">
+    android:layout_margin="20dp">
 
     <!-- First row -->
     <LinearLayout
         android:id="@+id/first_row"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:baselineAligned="false"
         android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,7 +30,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Name :" />
+                android:text="Name:" />
 
         </LinearLayout>
 
@@ -39,21 +40,22 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/editName"
+            <TextView
+                android:id="@+id/nameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:gravity="center" />
+                android:gravity="center_vertical" />
 
         </LinearLayout>
+
     </LinearLayout>
 
     <!-- Second row -->
     <LinearLayout
         android:id="@+id/second_row"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -73,38 +75,32 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
-                android:text="Gender :" />
+                android:text="Gender:" />
 
-            <!-- Add your views here for first column of second row -->
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <!-- Add your views here for second column of second row -->
-            <RadioButton
-                android:id="@+id/radiobutton_male"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Male" />
-
-            <RadioButton
-                android:id="@+id/radiobutton_female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Female" />
+            <TextView
+                android:id="@+id/genderTextView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical" />
 
         </LinearLayout>
+
     </LinearLayout>
 
     <!-- Third row -->
     <LinearLayout
         android:id="@+id/third_row"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:padding="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,14 +113,14 @@
             android:layout_height="match_parent"
             android:layout_weight="0.3"
             android:orientation="vertical">
-            <!-- Add your views here for first column of third row -->
+
             <TextView
                 android:id="@+id/hobby"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:gravity="top"
-                android:paddingTop="10dp"
+                android:layout_marginTop="10dp"
                 android:text="Hobby:" />
 
         </LinearLayout>
@@ -134,53 +130,30 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:orientation="vertical">
-            <!-- Add your views here for second column of third row -->
-            <RadioGroup
+
+            <TextView
+                android:id="@+id/hobbiesTextView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <CheckBox
-                    android:id="@+id/checkbox_coding"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Coding" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_reading"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Reading" />
-
-                <CheckBox
-                    android:id="@+id/checkbox_traveling"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Traveling" />
-
-            </RadioGroup>
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:layout_marginTop="10dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
+    <!-- Back Button -->
     <ImageButton
-        android:id="@+id/my_image_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/backbutton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/twitter"
-        app:layout_constraintEnd_toStartOf="@+id/another_button"
-        app:layout_constraintTop_toBottomOf="@id/third_row" />
-
-    <!-- Another Button next to the ImageButton -->
-    <ImageButton
-        android:id="@+id/another_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginLeft="20dp"
-        android:src="@drawable/twitter"
+        android:layout_marginEnd="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/back"
+        android:padding="15dp"
+        app:tint="@color/blue"
+        android:background="@android:drawable/dialog_holo_light_frame"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/third_row" />
 

@@ -17,8 +17,10 @@ public class CheckRadioActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_radio);
+
         checkbox_meat = (CheckBox) findViewById(R.id.checkbox_meat);
         checkbox_cheese = (CheckBox) findViewById(R.id.checkbox_cheese);
+
         checkbox_cheese.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

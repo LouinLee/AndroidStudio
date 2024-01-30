@@ -14,10 +14,11 @@
         android:text="I'm a button" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:scaleType="centerInside"
         android:contentDescription="A tiny Android icon"
-        android:src="@drawable/twitter"
+        android:src="@drawable/check"
         app:tint="#0055FF" />
 
     <Button
