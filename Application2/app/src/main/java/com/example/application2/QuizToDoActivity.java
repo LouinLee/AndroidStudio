@@ -2,86 +2,91 @@ package com.example.application2;
 
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class QuizToDoActivity extends AppCompatActivity {
 
     private EditText editName;
-    private RadioGroup radioGroup;
-    private RadioButton radioButtonOutdoor, radioButtonIndoor;
-    private CheckBox checkBoxSport, checkBoxTraveling, checkBoxFood, checkBoxStudy;
-    private Button submitButton;
+    private RadioGroup locationGroup;
+    private CheckBox checkboxSport, checkboxTraveling, checkboxFood, checkboxStudy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz_to_do);
 
-        // Initialize views
-        initViews();
-
-        // Set submit button listener
-        submitButton.setOnClickListener(v -> collectAndDisplayData());
+        initializeViews();
+        setupSubmitButton();
     }
 
-    private void initViews() {
+    private void initializeViews() {
         editName = findViewById(R.id.editName);
-        radioGroup = findViewById(R.id.radioGroup);
-        radioButtonOutdoor = findViewById(R.id.radiobutton_male); // Assuming 'Outdoor'
-        radioButtonIndoor = findViewById(R.id.radiobutton_female); // Assuming 'Indoor'
-        checkBoxSport = findViewById(R.id.checkbox_sport);
-        checkBoxTraveling = findViewById(R.id.checkbox_traveling);
-        checkBoxFood = findViewById(R.id.checkbox_food);
-        checkBoxStudy = findViewById(R.id.checkbox_study);
-        submitButton = findViewById(R.id.submit_button);
+        locationGroup = findViewById(R.id.radioGroup);
+        checkboxSport = findViewById(R.id.checkbox_sport);
+        checkboxTraveling = findViewById(R.id.checkbox_traveling);
+        checkboxFood = findViewById(R.id.checkbox_food);
+        checkboxStudy = findViewById(R.id.checkbox_study);
     }
 
-    private void collectAndDisplayData() {
-        String name = editName.getText().toString().trim();
-        String location = getLocation();
-        String activities = getSelectedActivities();
+    private void setupSubmitButton() {
+        Button submitButton = findViewById(R.id.submit_button);
+        submitButton.setOnClickListener(view -> handleSubmitButtonClick());
+    }
 
-        if (TextUtils.isEmpty(name)) {
-            Toast.makeText(this, "Please enter your name.", Toast.LENGTH_SHORT).show();
-            return;
+    private void handleSubmitButtonClick() {
+        String name = editName.getText().toString();
+        if(name.trim().isEmpty()) {
+            name = "Not specified";
         }
+        String location = getSelectedLocation();
+        String activityType = getActivityTypes();
 
-        String message = "Name: " + name + "\nLocation: " + location + "\nActivities: " + activities;
-        Log.d("Data", message);
-        Toast.makeText(QuizToDoActivity.this, message, Toast.LENGTH_LONG).show();
+        displayCustomToast(name, location, activityType);
     }
 
-    private String getLocation() {
-        int selectedId = radioGroup.getCheckedRadioButtonId();
-        if (selectedId == R.id.radiobutton_male) {
-            return "Outdoor";
-        } else if (selectedId == R.id.radiobutton_female) {
-            return "Indoor";
+    private String getSelectedLocation() {
+        RadioButton selectedLocation = findViewById(locationGroup.getCheckedRadioButtonId());
+        return selectedLocation != null ? selectedLocation.getText().toString() : "Not specified";
+    }
+
+    private String getActivityTypes() {
+        List<String> activityTypes = new ArrayList<>();
+        if (checkboxSport.isChecked()) activityTypes.add("Sports");
+        if (checkboxTraveling.isChecked()) activityTypes.add("Traveling");
+        if (checkboxFood.isChecked()) activityTypes.add("Food");
+        if (checkboxStudy.isChecked()) activityTypes.add("Study");
+
+        if (activityTypes.isEmpty()) {
+            return "Not specified";
         } else {
-            return "Not selected";
+            return TextUtils.join(", ", activityTypes);
         }
     }
 
-    private String getSelectedActivities() {
-        StringBuilder selectedActivities = new StringBuilder();
-        if (checkBoxSport.isChecked()) selectedActivities.append("Sports, ");
-        if (checkBoxTraveling.isChecked()) selectedActivities.append("Traveling, ");
-        if (checkBoxFood.isChecked()) selectedActivities.append("Food, ");
-        if (checkBoxStudy.isChecked()) selectedActivities.append("Study, ");
+    private void displayCustomToast(String name, String location, String activityType) {
+        String toastMessage = "Name: " + name + "\nLocation: " + location + "\nActivity Type: " + activityType;
 
-        // Remove the last comma and space if there are selected activities
-        if (selectedActivities.length() > 0) {
-            selectedActivities.delete(selectedActivities.length() - 2, selectedActivities.length());
-        }
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.custom_toast, null);
 
-        return selectedActivities.toString();
+        TextView text = layout.findViewById(R.id.custom_toast_text);
+        text.setText(toastMessage);
+
+        Toast toast = new Toast(getApplicationContext());
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(layout);
+        toast.show();
     }
 }
